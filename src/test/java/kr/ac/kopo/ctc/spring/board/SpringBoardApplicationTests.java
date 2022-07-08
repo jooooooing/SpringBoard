@@ -1,10 +1,10 @@
-package kr.ac.kopo.ctc.spring.resort;
+package kr.ac.kopo.ctc.spring.board;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringResortApplicationTests {
+class SpringBoardApplicationTests {
 
 	@Test
 	void contextLoads() {

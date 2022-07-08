@@ -1,4 +1,4 @@
-package kr.ac.kopo.ctc.spring.resort;
+package kr.ac.kopo.ctc.spring.board;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude= {DataSourceAutoConfiguration.class})
-public class SpringResortApplication {
+//@EnableAutoConfiguration(exclude= {DataSourceAutoConfiguration.class})
+public class SpringBoardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringResortApplication.class, args);
+		SpringApplication.run(SpringBoardApplication.class, args);
 	}
 
 }

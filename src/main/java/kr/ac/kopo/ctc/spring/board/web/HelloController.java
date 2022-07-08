@@ -1,4 +1,4 @@
-package kr.ac.kopo.ctc.spring.resort.web;
+package kr.ac.kopo.ctc.spring.board.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
