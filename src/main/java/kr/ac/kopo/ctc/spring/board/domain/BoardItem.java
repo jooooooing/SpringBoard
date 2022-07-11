@@ -1,6 +1,8 @@
 package kr.ac.kopo.ctc.spring.board.domain;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,25 +14,29 @@ public class BoardItem {
 
 	@Id
 	@GeneratedValue
-
 	@Column
-	private int id;
-	private int no;
+	private Integer id;
+	@Column
+	private Integer no;
+	@Column
 	private String title;
+	@Column
 	private String author;
+	@Column
 	private Date created;
-	private int view;
+	@Column
+	private Integer view;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public int getNo() {
+	public Integer getNo() {
 		return no;
 	}
-	public void setNo(int no) {
+	public void setNo(Integer no) {
 		this.no = no;
 	}
 	public String getTitle() {
@@ -51,10 +57,10 @@ public class BoardItem {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	public int getView() {
+	public Integer getView() {
 		return view;
 	}
-	public void setView(int view) {
+	public void setView(Integer view) {
 		this.view = view;
 	}
 
