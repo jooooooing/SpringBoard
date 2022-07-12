@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.ac.kopo.ctc.spring.board.repo.mapper.BoardItemMapper">
+	<select id="findAll" resultType="kr.ac.kopo.ctc.spring.board.domain.BoardItem">
+		select * from board_item
+	</select>
+
+	<select id="findAllByCondition" resultType="kr.ac.kopo.ctc.spring.board.domain.BoardItem">
+
+		select
+		*
+		from
+		board_item u
+		where 1 = 1 <!-- sql sytax오류를 방지하기 위해 의미없는 코드를 넣어줌 -->
+		<include refid="whereCondition" />
+	</select>
+
+
+	<select id="findOneByCondition" resultType="kr.ac.kopo.ctc.spring.board.domain.BoardItem">
+		select
+		*
+		from
+		board_item u
+		where author = #{author} <!-- sql sytax오류를 방지하기 위해 의미없는 코드를 넣어줌 -->
+		<include refid="whereCondition" />
+	</select>
+	
+	<select id="selectAllPage" resultType="kr.ac.kopo.ctc.spring.board.domain.BoardItem">
+		select
+		*
+		from
+		board_item u
+		where 1 = 1 <!-- sql sytax오류를 방지하기 위해 의미없는 코드를 넣어줌 -->
+		<include refid="whereCondition" />
+	</select>
+	
+	<select id="selectAllSearchPage" resultType="kr.ac.kopo.ctc.spring.board.domain.BoardItem">
+		select
+		*
+		from
+		board_item u
+		where author = #{author} <!-- sql sytax오류를 방지하기 위해 의미없는 코드를 넣어줌 -->
+		<include refid="whereCondition" />
+	</select>
+
+	<sql id="whereCondition">
+		<if test="id != null">
+			and u.board_item = #{id}
+			and u.board_item = #{author}
+		</if>
+	</sql>
+	
+	<!-- CRUD : Create -->
+	<select id="insertOne"
+		resultType="kr.ac.kopo.ctc.spring.board.domain.BoardItem">
+		insert into board_item (id, author, created, no, title, view)
+		values ("18", "작성자", "2022-07-22", "1", "제목", "1")
+	</select>
+
+	<!-- CRUD : delete -->
+	<select id="deleteOne"
+		resultType="kr.ac.kopo.ctc.spring.board.domain.BoardItem">
+		delete from board_item
+		where id = 12
+	</select>
+
+	<!-- CRUD : Update -->
+	<select id="updateOne"
+		resultType="kr.ac.kopo.ctc.spring.board.domain.BoardItem">
+		update board_item
+		set title = "수정제목"
+		where id = 14
+	</select>
+
+
+</mapper>
