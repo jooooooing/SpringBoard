@@ -7,13 +7,16 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class BoardItem {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //id autoincrement
 	@Column
 	private Integer id;
 	@Column
@@ -26,6 +29,23 @@ public class BoardItem {
 	private Date created;
 	@Column
 	private Integer view;
+		
+	public BoardGroup getBoardGroup() {
+		return boardGroup;
+	}
+
+	public void setBoardGroup(BoardGroup boardGroup) {
+		this.boardGroup = boardGroup;
+	}
+	@ManyToOne(optional=false)
+	@JoinColumn(name="BoardGroup_id")
+	private BoardGroup boardGroup;
+	
+	@Override
+	public String toString() {
+		String result = "[BoardItem_" +id+"] " + no;
+		return result;
+	}
 	
 	public Integer getId() {
 		return id;
