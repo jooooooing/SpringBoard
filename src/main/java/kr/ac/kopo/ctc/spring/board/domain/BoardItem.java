@@ -37,6 +37,7 @@ public class BoardItem {
 	public void setBoardGroup(BoardGroup boardGroup) {
 		this.boardGroup = boardGroup;
 	}
+	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="BoardGroup_id")
 	private BoardGroup boardGroup;
