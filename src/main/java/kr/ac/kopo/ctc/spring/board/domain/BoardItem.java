@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class BoardItem {
 
@@ -38,8 +40,9 @@ public class BoardItem {
 		this.boardGroup = boardGroup;
 	}
 	
+	@JsonBackReference
 	@ManyToOne(optional=false)
-	@JoinColumn(name="BoardGroup_id")
+	@JoinColumn(name="boardGroup_id")
 	private BoardGroup boardGroup;
 	
 	@Override

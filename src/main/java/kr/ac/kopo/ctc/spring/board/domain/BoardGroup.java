@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class BoardGroup {
 	
@@ -23,6 +25,7 @@ public class BoardGroup {
 	@Column
 	private String name;
 	
+	@JsonManagedReference
 	@OneToMany(cascade=CascadeType.ALL, fetch= FetchType.LAZY, mappedBy="boardGroup")
 	private List<BoardItem> boardItems;
 

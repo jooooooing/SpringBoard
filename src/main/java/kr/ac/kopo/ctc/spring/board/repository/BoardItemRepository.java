@@ -19,6 +19,8 @@ public interface BoardItemRepository extends JpaRepository<BoardItem, Integer>, 
 	
 //	Page<BoardItem> findAllByType(String author, Pageable pageable);
 	
-	List<BoardItem> findAllByTitleContaining(String title, PageRequest pageRequest);
-	List<BoardItem> findAllByTitleContaining(String title);
+//	List<BoardItem> findAllByTitleContaining(String title, PageRequest pageRequest);
+//	List<BoardItem> findAllByTitleContaining(String title);
+	List<BoardItem> findAllByBoardGroupId(Integer groupId);
+	
 }
