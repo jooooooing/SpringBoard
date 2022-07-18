@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.ctc.spring.board.domain.BoardItem;
 
+//MyBatis용
 @Mapper
 @Repository
 public interface BoardItemMapper {

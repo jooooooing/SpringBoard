@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+#btn {
+	text-align : right;
+}
+
+table {
+	margin : 10px auto;
+	width :600px;
+	border-collapse: collapse;
+	
+}

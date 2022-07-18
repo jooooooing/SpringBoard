@@ -22,13 +22,54 @@ public class BoardItem {
 	@Column
 	private Integer id;
 	@Column
-	private Integer no;
-	@Column
-	private String title;
-	@Column
 	private String author;
 	@Column
 	private Date created;
+	@Column
+	private Integer no;
+	public Integer getRecnt() {
+		return recnt;
+	}
+
+	public void setRecnt(Integer recnt) {
+		this.recnt = recnt;
+	}
+
+	public Integer getRelevel() {
+		return relevel;
+	}
+
+	public void setRelevel(Integer relevel) {
+		this.relevel = relevel;
+	}
+
+	public Integer getRootid() {
+		return rootid;
+	}
+
+	public void setRootid(Integer rootid) {
+		this.rootid = rootid;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	@Column
+	private String title;
+	@Column
+	private Integer recnt;
+	@Column
+	private Integer relevel;
+	@Column
+	private Integer rootid;
+	@Column
+	private String text;
+	
 	@Column
 	private Integer view;
 		
@@ -40,7 +81,7 @@ public class BoardItem {
 		this.boardGroup = boardGroup;
 	}
 	
-	@JsonBackReference
+	@JsonBackReference //순환참조방지
 	@ManyToOne(optional=false)
 	@JoinColumn(name="boardGroup_id")
 	private BoardGroup boardGroup;

@@ -25,7 +25,7 @@ public class BoardGroup {
 	@Column
 	private String name;
 	
-	@JsonManagedReference
+	@JsonManagedReference //순환참조 방지
 	@OneToMany(cascade=CascadeType.ALL, fetch= FetchType.LAZY, mappedBy="boardGroup")
 	private List<BoardItem> boardItems;
 
