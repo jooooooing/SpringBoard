@@ -3,19 +3,26 @@ package kr.ac.kopo.ctc.spring.board.domain;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class BoardItem {
+	
+	//부모가 지워지면 자식도 지워지도록함(orphan removal)
+	@OneToMany(mappedBy = "boardItem", fetch=FetchType.EAGER, orphanRemoval = true)
+	private List<BoardReply> boardReply;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //id autoincrement
@@ -25,22 +32,33 @@ public class BoardItem {
 	private String author;
 	@Column
 	private Date created;
+	
 	@Column
-	private Integer no;
-	public Integer getRecnt() {
-		return recnt;
-	}
+	private String title;
 
-	public void setRecnt(Integer recnt) {
-		this.recnt = recnt;
-	}
+	@Column
+	private Integer rootid;
+	
+	@Column(columnDefinition = "TEXT")
+	private String content;
+	
+	@Column(columnDefinition = "integer default 0", nullable = false)
+	private Integer view;
 
-	public Integer getRelevel() {
-		return relevel;
+	public String getTitle() {
+		return title;
 	}
-
-	public void setRelevel(Integer relevel) {
-		this.relevel = relevel;
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public String getContent() {
+		return content;
+	}
+	
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Integer getRootid() {
@@ -51,27 +69,14 @@ public class BoardItem {
 		this.rootid = rootid;
 	}
 
-	public String getText() {
-		return text;
+	public String getcontent() {
+		return content;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setcontent(String content) {
+		this.content = content;
 	}
 
-	@Column
-	private String title;
-	@Column
-	private Integer recnt;
-	@Column
-	private Integer relevel;
-	@Column
-	private Integer rootid;
-	@Column
-	private String text;
-	
-	@Column
-	private Integer view;
 		
 	public BoardGroup getBoardGroup() {
 		return boardGroup;
@@ -88,7 +93,7 @@ public class BoardItem {
 	
 	@Override
 	public String toString() {
-		String result = "[BoardItem_" +id+"] " + no;
+		String result = "[BoardItem_" +id+"] ";
 		return result;
 	}
 	
@@ -97,18 +102,6 @@ public class BoardItem {
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Integer getNo() {
-		return no;
-	}
-	public void setNo(Integer no) {
-		this.no = no;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
 	}
 	public String getAuthor() {
 		return author;

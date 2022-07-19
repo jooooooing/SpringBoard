@@ -1,5 +1,6 @@
 package kr.ac.kopo.ctc.spring.board.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ import kr.ac.kopo.ctc.spring.board.repository.BoardItemRepository;
 
 @Service
 public class BoardItemServiceImpl implements BoardItemService {
-	
+
 	@Autowired
 	BoardItemRepository boardItemRepository;
 
@@ -111,19 +112,37 @@ public class BoardItemServiceImpl implements BoardItemService {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
-
-
+	
 	@Override
-	public List<BoardItem> findAll() {
+	public List<BoardItem> selectItemAll() {
 		List<BoardItem> list = boardItemRepository.findAll();
 		return list;
 	}
 
 	@Override
-	public Optional<BoardItem> findById(Integer id) {
-		Optional<BoardItem> list = boardItemRepository.findById(id);
-		return list;
+	public Optional<BoardItem> selectItemOne(Integer id) {
+		Optional<BoardItem> boardItem = boardItemRepository.findById(id);
+		return boardItem;
 	}
 
+	@Override
+	public void deleteItem(Integer id) {
+		boardItemRepository.deleteById(id);
+	}
+
+	@Override
+	public void updateItem(BoardItem boardItem) {
+		
+	}
+
+	@Override
+	public void insertItem(BoardItem boardItem) {
+		boardItemRepository.
+	}
+
+	@Override
+	public void countView(Integer id) {
+		boardItemRepository.updateCnt(id);
+	}
 
 }

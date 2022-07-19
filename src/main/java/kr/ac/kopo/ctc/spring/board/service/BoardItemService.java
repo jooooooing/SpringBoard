@@ -30,10 +30,20 @@ public interface BoardItemService {
 //	String testNoTransactional();
 //	String testTransactional();
 	
-	//게시판 구현
-	List<BoardItem> findAll();
-	//하나 읽기
-	Optional<BoardItem> findById(Integer id);
+	//게시판 전체 읽기
+	List<BoardItem> selectItemAll();
 	
+	//하나 읽기
+	Optional<BoardItem> selectItemOne(Integer id);
+	
+	//delete
+	void deleteItem(Integer id);
+	//update
+	void updateItem(BoardItem boardItem);
+	//insert
+	void insertItem(BoardItem boardItem);
+	//조회수 카운트
+	void countView(Integer id);
+
 
 }

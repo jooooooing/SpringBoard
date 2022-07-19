@@ -2,24 +2,24 @@ package kr.ac.kopo.ctc.spring.board.web;
 
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.kopo.ctc.spring.board.domain.BoardItem;
-import kr.ac.kopo.ctc.spring.board.repository.BoardItemRepository;
 import kr.ac.kopo.ctc.spring.board.service.BoardItemServiceImpl;
 
 @Controller
 @RequestMapping(value = "/board")
 public class BoardItemController {
-	@Autowired // 한 줄마다 추가해줘야 함
-	private BoardItemRepository boardItemRepository;
+//	@Autowired // 한 줄마다 추가해줘야 함 컨트롤에는 serviceImpl이 더 정확함
+//	private BoardItemRepository boardItemRepository;
+	
 	@Autowired // 한 줄마다 추가해줘야 함
 	private BoardItemServiceImpl boardItemServiceImpl;
 	
@@ -73,18 +73,42 @@ public class BoardItemController {
 //		return "hello";
 //	}
 	
-	@RequestMapping(value = "/allView")
+	@RequestMapping(value = "/allView") //게시글 전체조회
     public String allView(Model model) {
-		List<BoardItem> list = boardItemServiceImpl.findAll();
-        model.addAttribute("allView", list);
+		List<BoardItem> boardItems = boardItemServiceImpl.selectItemAll();
+        model.addAttribute("boardItems", boardItems);
         return "allView";
     }
 	
-	@GetMapping("/{id}") //get방식 매핑 
-	public String oneView(Model model, @PathVariable("id") String id) {
-		BoardItem boardItem = boardItemRepository.findById(Integer.parseInt(id)).get();
-		model.addAttribute("oneView", boardItem);
+	@RequestMapping(value="/oneView") //게시글 상세조회
+	public String oneView(Model model, HttpServletRequest request) {
+		String id = request.getParameter("id");
+		Optional<BoardItem> boardItem = boardItemServiceImpl.selectItemOne(Integer.parseInt(id));
+		model.addAttribute("boardItem", boardItem.get());
 		return "oneView";
 	}
+	
+	@RequestMapping(value="/updateView") //게시글 수정 조회
+	public String updateView(Model model, HttpServletRequest request) {
+		String id = request.getParameter("id");
+		Optional<BoardItem> boardItem = boardItemServiceImpl.selectItemOne(Integer.parseInt(id));
+		model.addAttribute("boardItem", boardItem.get());
+		return "updateView";
+	}
+	
+	@RequestMapping(value = "/delete") //게시글 삭제
+	public String deleteItem(Model model, HttpServletRequest request) {
+		String id = request.getParameter("id");
+		boardItemServiceImpl.deleteItem(Integer.parseInt(id));
+		return "delete";
+	}
+	
+	@RequestMapping(value = "/update") //게시글 삭제
+	public String updateItem() {
+	
+		return "update";
+	}
+	
+	
 }
 

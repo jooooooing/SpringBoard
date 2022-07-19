@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" href="./style.css"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BoardItem List</title>
 </head>
 <body>
 
@@ -20,15 +20,14 @@
 				<td>조회수</td>
 				<td>등록일</td>
 			</tr>
-			</div>
 
-			<c:forEach var="allViewList" items="${allView}">
+			<c:forEach var="allView" items="${boardItems}">
 				<tr>
-					<td>${allViewList.id}</td>
-					<td><a href="/${allViewList.id}"> ${allViewList.title}</a></td>
-					<td>${allViewList.author}</td>
-					<td>${allViewList.view}</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value = "${allViewList.created}"/></td>
+					<td>${allView.id}</td>
+					<td><a href="/board/oneView?id=${allView.id}"> ${allView.title}</a></td>
+					<td>${allView.author}</td>
+					<td>${allView.view}</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value = "${allView.created}"/></td>
 					<!--날짜형식 지정  -->
 				</tr>
 			</c:forEach>
