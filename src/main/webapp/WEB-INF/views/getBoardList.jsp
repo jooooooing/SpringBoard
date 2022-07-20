@@ -24,13 +24,18 @@
             border: 1px solid #444444;
             text-align: center;
         }
+        
+        #foot{
+        margin-top: 10px;
+        text-align : center;
+        }
     </style>
 
 
 </head>
 <body>
 	<div style="text-align: center;">
-		<h1>게시판 목록</h1>
+		<h1>Poly 자유 게시판</h1>
 		<table style="width: 700px; margin: auto">
 			<tr>
 				<th style="width: 10%">번호</th>
@@ -50,7 +55,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<div>
+		<div id="foot">
 		<input type=button value="글쓰기" OnClick="location.href='insertBoardView'">
 		</div>
 	</div>

@@ -27,16 +27,19 @@ table td {
 	border: 1px solid #444444;
 	text-align: left;
 }
+
+#foot {
+	margin-top: 10px;
+}
 </style>
 
 <!-- 현재날짜 구하기 위한 선언 및 형식 지정 -->
 <c:set var="date" value="<%=new java.util.Date()%>" />
-<fmt:formatDate value="${date}" pattern="yyyy-MM-dd" var="today"/>
+<fmt:formatDate value="${date}" pattern="yyyy-MM-dd" var="today" />
 </head>
 <body>
 	<div style="text-align: center;">
-		<h3>글쓰기</h3>
-		<hr>
+		<h1>글쓰기</h1>
 		<form action="insertBoard" method="post">
 			<table style="width: 700px; margin: auto">
 				<tr>
@@ -49,14 +52,14 @@ table td {
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea name="content" cols="40" rows="10"></textarea></td>
+					<td><textarea name="content" cols="70" rows="10"></textarea></td>
 				</tr>
 				<tr>
 					<th>등록일</th>
-					<td><input type="text" name="today" value = "${today}"></td>
+					<td><input type="text" name="today" value="${today}" readonly></td>
 				</tr>
 			</table>
-			<div>
+			<div id="foot">
 				<input type=button value="목록" OnClick="location.href='getBoardList'">
 				<input type="submit" value="등록" />
 			</div>

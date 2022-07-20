@@ -3,6 +3,7 @@ package kr.ac.kopo.ctc.spring.board.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort; //역순 출력을 위한 import
 import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.ctc.spring.board.domain.Board;
@@ -19,7 +20,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<Board> getBoardList(Board board) {
-		return (List<Board>) boardRepository.findAll();
+//		return (List<Board>) boardRepository.findAll();
+		return (List<Board>) boardRepository.findAll(Sort.by(Sort.Direction.DESC, "seq")); //역순으로 출력 repo에 메소드 생성
 	}
 
 	@Override

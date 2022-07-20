@@ -8,66 +8,67 @@
 <meta charset="UTF-8">
 <title>글상세</title>
     <style>
-        table {
-            width: 100%;
-            border: 1px solid #444444;
-            border-collapse: collapse;
-        }
-        table th {
-            border: 1px solid #444444;
-            text-align: center;
-            height: 40px;
-            background-color: dodgerblue;
-            color: cornsilk;
-        }
-        table td {
-            border: 1px solid #444444;
-            text-align: left;
-        }
-    </style>
+table {
+	width: 100%;
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+table th {
+	border: 1px solid #444444;
+	text-align: center;
+	height: 40px;
+	background-color: dodgerblue;
+	color: cornsilk;
+}
+
+table td {
+	border: 1px solid #444444;
+	text-align: left;
+}
+
+#foot {
+	margin-top: 10px;
+	text-align: center;
+}
+</style>
 
 
 </head>
 <body>
 <div style="text-align: center;">
-    <h3>상세조회</h3>
-    <hr>
+    <h1>상세조회</h1>
     <form action="updateBoard" method="post">
         <input type="hidden" name="seq" value="${board.seq}"/>
         <table style="width: 700px; margin: auto">
             <tr>
-                <td width="70" style="background-color: dodgerblue; color: cornsilk">제목</td>
+            <th>제목</th>
                 <td><input type="text" name="title" value="${board.title}"/></td>
             </tr>
             <tr>
-                <td style="background-color: dodgerblue; color: cornsilk">작성자</td>
+            <th>작성자</th>
                 <td><input type="text" name="writer" value="${board.writer}"/></td>
             </tr>
             <tr>
-                <td style="background-color: dodgerblue; color: cornsilk">내용</td>
-                <td><textarea name="content" cols="40" rows="10">${board.content}</textarea></td>
+            <th>내용</th>
+                <td><textarea name="content" cols="70" rows="10">${board.content}</textarea></td>
             </tr>
             <tr>
-                <td style="background-color: dodgerblue; color: cornsilk">등록일</td>
+            <th>등록일</th>
                 <td><fmt:formatDate value="${board.createDate}" pattern="yyyy-MM-dd"></fmt:formatDate> </td>
             </tr>
             <tr>
-                <td style="background-color: dodgerblue; color: cornsilk">조회수</td>
+            <th>조회수</th>
                 <td>${board.cnt}</td>
             </tr>
-            <tr>
-                <td colspan="2">
-                    <div style="text-align: center;">
-                        <input type="submit" value="수정"/>
-                    </div>
-                </td>
-            </tr>
         </table>
+                    <div id = "foot">
+                        <input type="button" value="삭제"  OnClick="location.href='deleteBoard?seq=${board.seq}'"/>
+                        <input type="button" value="목록"  OnClick="location.href='getBoardList'"/>
+                        <input type="submit" value="수정"/>
+                        <input type="button" value="댓글"/>
+                    </div>
     </form>
-    <hr>
-    <a href="insertBoardView">글등록</a>
-    <a href="deleteBoard?seq=${board.seq}">글삭제</a>
-    <a href="getBoardList">글목록</a>
 </div>
 </body>
 </html>
