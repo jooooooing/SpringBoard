@@ -12,34 +12,51 @@ import kr.ac.kopo.ctc.spring.board.repository.BoardRepository;
 public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
-	BoardRepository boardRepository;
+	private BoardRepository boardRepository;
 	
 //	@param boarod
 //	@return
 	
 	@Override
 	public List<Board> getBoardList(Board board) {
-		List<Board> list = boardRepository.findAll();
-		return list;
+		return (List<Board>) boardRepository.findAll();
 	}
 
 	@Override
 	public void insertBoard(Board board) {
+		board.setCnt(0L); //조회수 0으로 설정
 		boardRepository.save(board);
 	}
 
 	@Override
 	public Board getBoard(Board board) {
-		return null;
+		//조회수 카운트  +1
+		Board findBoard = boardRepository.findById(board.getSeq()).get();
+		findBoard.setCnt(findBoard.getCnt()+1L);
+		boardRepository.save(findBoard);
+		return findBoard;
 	}
 
 	@Override
 	public void updateBoard(Board board) {
 		
+		//수정 대상 글을 가져온다
+		Board findBoard = boardRepository.findById(board.getSeq()).get();
+		
+		//가져온 글에 수정한 내용을 세팅한다.
+		findBoard.setTitle(board.getTitle());
+		findBoard.setWriter(board.getWriter());
+		findBoard.setContent(board.getContent());
+		
+		//DB에 저장
+		boardRepository.save(findBoard);
+		
 	}
-
+	
+	//삭제
 	@Override
 	public void deleteBoard(Board board) {
+		boardRepository.deleteById(board.getSeq());
 		
 	}
 

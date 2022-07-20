@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.ac.kopo.ctc.spring.board.domain.Board;
 import kr.ac.kopo.ctc.spring.board.service.BoardService;
-import kr.ac.kopo.ctc.spring.board.service.BoardServiceImpl;
 
 @Controller
 @RequestMapping(value = "/board")
@@ -39,13 +38,19 @@ public class BoardController {
 	//게시글 전체조회
 	@RequestMapping("/getBoardList")
 	public String getBoardList(Model model, Board board) {
-		List<Board> boardList = boardService.getBoardList(board);
-		model.addAttribute("boardlist", boardList);
+		List<Board> boardLists = boardService.getBoardList(board);
+		model.addAttribute("boardList", boardLists);
 		return "getBoardList";
 	}
 	
+//	글 하나 조회
+	@RequestMapping("/getBoard")
+	public String getBoard(Board board, Model model) {
+		model.addAttribute("board", boardService.getBoard((board)));
+		return "getBoard";
+	}
+	
 //	글쓰기 화면 
-//	@return
 	
 	@RequestMapping("/insertBoardView")
 	public String insertBoardView() {
@@ -53,13 +58,27 @@ public class BoardController {
 	}
 	
 //	글쓰기 처리
-//	@param board
-//	@return
 	
 	@RequestMapping("/insertBoard")
 	public String insertBoard(Board board) {
 		boardService.insertBoard(board);
 		return "redirect:getBoardList";
 	}
+	
+	
+//	글 수정
+	@RequestMapping("/updateBoard")
+	public String updateBaord(Board board) {
+		boardService.updateBoard(board);
+		return "redirect:getBoardList";
+	}
+	
 
+//	글 삭제
+	@RequestMapping("/deleteBoard")
+	public String deleteBoard(Board board) {
+		boardService.deleteBoard(board);
+		return "redirect:getBoardList";
+	}
+	
 }

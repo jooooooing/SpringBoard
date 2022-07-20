@@ -8,7 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 @Entity
+@DynamicInsert
 public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //id autoincrement
@@ -16,14 +20,14 @@ public class Board {
 	private Long seq; //pk
 	@Column
 	private String title; //제목
-	@Column(updatable = false) //update시점에 막음
+	@Column //(updatable = false) //update시점에 막음
 	private String writer; //작성자
 	@Column
 	private String content; //내용
-	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
-	private Date createDate; //생성일자
+	@Column
+	private Date createDate = new Date(); //생성일자
 	
-	@Column (insertable = false, columnDefinition = "number default 0")
+	@Column
 	private Long cnt; //조회수
 	
 	public Long getSeq() {
