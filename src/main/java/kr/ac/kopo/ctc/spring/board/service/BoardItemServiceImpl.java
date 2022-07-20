@@ -137,12 +137,10 @@ public class BoardItemServiceImpl implements BoardItemService {
 
 	@Override
 	public void insertItem(BoardItem boardItem) {
-		boardItemRepository.
 	}
 
 	@Override
 	public void countView(Integer id) {
-		boardItemRepository.updateCnt(id);
 	}
 
 }

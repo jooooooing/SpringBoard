@@ -38,6 +38,7 @@ public interface BoardItemService {
 	
 	//delete
 	void deleteItem(Integer id);
+	
 	//update
 	void updateItem(BoardItem boardItem);
 	//insert

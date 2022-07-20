@@ -26,7 +26,7 @@
 		</tr>
 		<tr>
 			<td><b>작성자</b></td>
-			<td><input type='hidden' name="author" value=제목>${boardItem.author}</td>
+			<td><input type='hidden' name="author" value=작성자>${boardItem.author}</td>
 		</tr>
 
 		<tr>
@@ -54,7 +54,7 @@
 			<td><input type=button value="저장"
 				OnClick="location.href='./update'"></td>
 			<td><input type=button value="삭제"
-				OnClick="location.href='./delete'"></td>
+				OnClick="location.href='./DB_Delete?id=${boardItem.id}'"></td>
 		</tr>
 
 	</table>

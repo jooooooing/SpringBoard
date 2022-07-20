@@ -22,7 +22,7 @@ public interface BoardItemRepository extends JpaRepository<BoardItem, Integer> {
 	List<BoardItem> findAllByTitleContaining(String title);
 	List<BoardItem> findAllByBoardGroupId(Integer groupId);
 
-	void updateCnt(Integer id);
+//	void updateCnt(Integer id);
 	
 	
 	

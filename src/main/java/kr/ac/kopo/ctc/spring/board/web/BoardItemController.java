@@ -15,7 +15,7 @@ import kr.ac.kopo.ctc.spring.board.domain.BoardItem;
 import kr.ac.kopo.ctc.spring.board.service.BoardItemServiceImpl;
 
 @Controller
-@RequestMapping(value = "/board")
+@RequestMapping(value = "/boardItem")
 public class BoardItemController {
 //	@Autowired // 한 줄마다 추가해줘야 함 컨트롤에는 serviceImpl이 더 정확함
 //	private BoardItemRepository boardItemRepository;
@@ -109,6 +109,4 @@ public class BoardItemController {
 		return "update";
 	}
 	
-	
 }
-

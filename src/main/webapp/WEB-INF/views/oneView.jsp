@@ -53,7 +53,7 @@
 			<td><input type=button value="수정"
 				OnClick="location.href='./updateView?id=${boardItem.id}'"></td>
 			<td><input type=button value="삭제"
-				OnClick="location.href='./delete?id=${boardItem.id}'"></td>
+				OnClick="location.href='./DB_Delete?id=${boardItem.id}'"></td>
 		</tr>
 	</table>
 

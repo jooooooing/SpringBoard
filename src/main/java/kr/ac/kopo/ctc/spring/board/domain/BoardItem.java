@@ -35,9 +35,6 @@ public class BoardItem {
 	
 	@Column
 	private String title;
-
-	@Column
-	private Integer rootid;
 	
 	@Column(columnDefinition = "TEXT")
 	private String content;
@@ -61,14 +58,6 @@ public class BoardItem {
 		this.content = content;
 	}
 
-	public Integer getRootid() {
-		return rootid;
-	}
-
-	public void setRootid(Integer rootid) {
-		this.rootid = rootid;
-	}
-
 	public String getcontent() {
 		return content;
 	}
@@ -77,7 +66,6 @@ public class BoardItem {
 		this.content = content;
 	}
 
-		
 	public BoardGroup getBoardGroup() {
 		return boardGroup;
 	}
