@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.ac.kopo.ctc.spring.board.domain.Board;
 import kr.ac.kopo.ctc.spring.board.service.BoardService;
@@ -17,11 +19,11 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-//	@RequestMapping("/testBoardList")
+//	@RequestMapping("/testBoardList") //글 조회 테스트
 //	public String testBoardList(Model model) {
 //		List<Board> boardList = new ArrayList<Board>();
 //		
-//		for (int i = 0; i <9; i++) {
+//		for (int i = 0; i <100; i++) {
 //			Board board = new Board();
 //			board.setSeq(new Long(i));
 //			board.setTitle("제목 " + i);
@@ -80,5 +82,26 @@ public class BoardController {
 		boardService.deleteBoard(board);
 		return "redirect:getBoardList";
 	}
+	
+	//글 검색
+	@GetMapping("/search")
+	public String search(@RequestParam(value = "keyword") String keyword, Model model) {
+		model.addAttribute("keyword", keyword); //뷰에서 받은 getparameter 저장
+		List<Board> boardSearched = boardService.searchPosts(keyword); //List자료형에 search메소드 결과값 저
+		model.addAttribute("boardList", boardSearched); //boardList(getBoardList에 사용할 변수값)에 위 결과값인 boardSearched저장
+		return "getBoardList";
+	}
+	
+	//페이지 리스트
+	@GetMapping("/getBoardListPaging")
+	public String getBoardListPaging(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+		List<Board> boardList = boardService.getBoardListPaging(pageNum);
+		Integer[] pageList = boardService.getPageList(pageNum);
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pageList", pageList);
+		return "getBoardList";
+	}
+			
 	
 }

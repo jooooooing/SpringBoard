@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 @Entity
@@ -16,7 +15,7 @@ import org.hibernate.annotations.DynamicInsert;
 public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //id autoincrement
-	@Column
+	@Column (name="seq")
 	private Long seq; //pk
 	@Column
 	private String title; //제목

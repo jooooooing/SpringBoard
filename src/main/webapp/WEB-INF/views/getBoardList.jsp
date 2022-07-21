@@ -1,35 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <style>
-        table {
-            width: 100%;
-            border: 1px solid #444444;
-            border-collapse: collapse;
-        }
-        table th {
-            border: 1px solid #444444;
-            text-align: center;
-            height: 40px;
-            background-color: dodgerblue;
-            color: cornsilk;
-        }
-        table td {
-            border: 1px solid #444444;
-            text-align: center;
-        }
-        
-        #foot{
-        margin-top: 10px;
-        text-align : center;
-        }
-    </style>
+<style> 
+ table {
+	width: 100%;
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+table th {
+	border: 1px solid #444444;
+	text-align: center;
+	height: 40px;
+	background-color: dodgerblue;
+	color: cornsilk;
+}
+
+table td {
+	border: 1px solid #444444;
+	text-align: center;
+}
+
+#foot {
+	margin-top: 10px;
+	text-align: center;
+	 display: inline;
+}
+
+.search {
+    display: inline;
+} 
+</style> 
 
 
 </head>
@@ -50,14 +57,31 @@
 					<td style="text-align: left"><a
 						href="getBoard?seq=${board.seq}">${board.title}</a></td>
 					<td>${board.writer}</td>
-					<td><fmt:formatDate value="${board.createDate}"	pattern="yyyy-MM-dd"></fmt:formatDate></td>
+					<td><fmt:formatDate value="${board.createDate}"
+							pattern="yyyy-MM-dd"></fmt:formatDate></td>
 					<td>${board.cnt}</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<div id="foot">
-		<input type=button value="글쓰기" OnClick="location.href='insertBoardView'">
+			<input type=button value="목록"
+				OnClick="location.href='getBoardList'">
+			<input type=button value="글쓰기"
+				OnClick="location.href='insertBoardView'">
 		</div>
+		<div>
+		<c:forEach var="page" items="${pageList}">
+		<span>
+		${page}
+		</span>
+		</c:forEach>
+		</div>
+		<form action="search" method="GET">
+			<div class="search">
+				<input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+			<button>검색하기</button>
+			</div>
+		</form>
 	</div>
 </body>
 </html>

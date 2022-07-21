@@ -1,12 +1,29 @@
 @charset "UTF-8";
 
-#btn {
-	text-align : right;
+table {
+	width: 100%;
+	border: 1px solid #444444;
+	border-collapse: collapse;
 }
 
-table {
-	margin : 10px auto;
-	width :600px;
-	border-collapse: collapse;
-	
+table th {
+	border: 1px solid #444444;
+	text-align: center;
+	height: 40px;
+	background-color: dodgerblue;
+	color: cornsilk;
+}
+
+table td {
+	border: 1px solid #444444;
+	text-align: center;
+}
+
+#foot {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.search {
+    display: inline;
 }
