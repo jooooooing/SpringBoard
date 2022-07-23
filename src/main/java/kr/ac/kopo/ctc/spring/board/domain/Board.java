@@ -40,7 +40,7 @@ public class Board {
 	@JsonBackReference // 순환참조 막기
 	private List<BoardReply> boardReplies;
 
-	public List<BoardReply> getBoardRes() {
+	public List<BoardReply> getBoardReply() {
 		if (boardReplies == null) {
 			boardReplies = new ArrayList<BoardReply>();
 		}
@@ -56,7 +56,7 @@ public class Board {
 	}
 	
 	public void addBoardRe(BoardReply boardReply) {
-		List<BoardReply> boardReplies = getBoardRes();
+		List<BoardReply> boardReplies = getBoardReply();
 		boardReplies.add(boardReply);
 	}
 	

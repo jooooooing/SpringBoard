@@ -44,7 +44,7 @@ public class BoardReply {
 		this.content = content;
 		this.author = author;
 		this.createdDate = createdDate;
-		this.viewCnt = 0;
+		this.viewCnt = 0; //최초 생성시 조회수 0으로  세팅 
 		this.board = board;
 	}
 
