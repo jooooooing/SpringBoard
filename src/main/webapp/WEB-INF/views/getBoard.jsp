@@ -64,7 +64,7 @@ table td {
         </table>
                     <div id = "foot">
                         <input type="button" value="삭제"  OnClick="location.href='deleteBoard?seq=${board.seq}'"/>
-                        <input type="button" value="목록"  OnClick="location.href='getBoardList'"/>
+                        <input type="button" value="목록"  OnClick="location.href='boardList'"/>
                         <input type="submit" value="수정"/>
                         <input type="button" value="댓글"/>
                     </div>

@@ -29,7 +29,7 @@ class BoardRepositoryTest {
 	@Test
 	void InsertDummy() {
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 1; i < 201; i++) {
 			Board board = new Board();
 			board.setTitle("제목 " + i);
 			board.setWriter("작성자 " + i);

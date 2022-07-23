@@ -60,7 +60,7 @@ table td {
 				</tr>
 			</table>
 			<div id="foot">
-				<input type=button value="목록" OnClick="location.href='getBoardList'">
+				<input type=button value="목록" OnClick="location.href='boardList'">
 				<input type="submit" value="등록" />
 			</div>
 		</form>

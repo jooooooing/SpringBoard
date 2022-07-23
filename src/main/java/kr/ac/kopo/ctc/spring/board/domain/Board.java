@@ -1,14 +1,21 @@
 package kr.ac.kopo.ctc.spring.board.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicInsert;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @DynamicInsert
@@ -28,6 +35,30 @@ public class Board {
 	
 	@Column
 	private Long cnt; //조회수
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "board")
+	@JsonBackReference // 순환참조 막기
+	private List<BoardRe> boardRes;
+
+	public List<BoardRe> getBoardRes() {
+		if (boardRes == null) {
+			boardRes = new ArrayList<BoardRe>();
+		}
+		return boardRes;
+	}
+
+	public void setBoardRes(List<BoardRe> boardRes) {
+		this.boardRes = boardRes;
+	}
+
+	public Board() {
+		
+	}
+	
+	public void addBoardRe(BoardRe boardRe) {
+		List<BoardRe> boardRes = getBoardRes();
+		boardRes.add(boardRe);
+	}
 	
 	public Long getSeq() {
 		return seq;
@@ -65,5 +96,16 @@ public class Board {
 	public void setCnt(Long cnt) {
 		this.cnt = cnt;
 	}
+
+	public Board(String title, String writer, String content, Date createDate) {
+		this.title = title;
+		this.writer = writer;
+		this.content = content;
+		this.createDate = createDate;
+		this.cnt=0L;
+	}
+
+	
+	
 
 }

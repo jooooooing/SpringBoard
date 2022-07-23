@@ -2,13 +2,15 @@ package kr.ac.kopo.ctc.spring.board.repository;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
+
 import kr.ac.kopo.ctc.spring.board.domain.Board;
 
-public interface BoardRepository extends JpaRepository<Board, Long>{
+@Repository
+public interface BoardRepository extends JpaRepository<Board, Long>, JpaSpecificationExecutor<Board>{
 
 	List<Board> findAll(Sort by); //역순 출력을 위한 메소드
 
