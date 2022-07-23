@@ -1,7 +1,6 @@
 package kr.ac.kopo.ctc.spring.board.domain;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,36 +10,95 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 
-import org.springframework.lang.NonNull;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class BoardReply {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private Integer replyId;
+	private Integer replyId; //pk
 	
-	@NonNull
-	@Column(nullable=false, length = 120)
+	@Column
 	private String content;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id")
-	private BoardItem boardItem;
-	
 	@Column
-	private String time;
-	
-	@PrePersist
-	public void createdAt() {
-		this.time=LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString();
-	}
-	
-	@Column(nullable = false, length = 120)
 	private String author;
 	
-	public BoardReply() {}
+	@Column Date createdDate = new Date();
+	
+	@Column Integer viewCnt;
+	
+	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+	@JsonManagedReference //참조 통과 어노테이션
+	@JoinColumn(name="board_seq")
+	private Board board;
+
+	
+	
+	
+	public BoardReply(String content, String author, Date createdDate, Integer viewCnt, Board board) {
+		super();
+		this.content = content;
+		this.author = author;
+		this.createdDate = createdDate;
+		this.viewCnt = 0;
+		this.board = board;
+	}
+
+	public Integer getReplyId() {
+		return replyId;
+	}
+
+	public void setReplyId(Integer replyId) {
+		this.replyId = replyId;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Integer getViewCnt() {
+		return viewCnt;
+	}
+
+	public void setViewCnt(Integer viewCnt) {
+		this.viewCnt = viewCnt;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	
+	
+	
+	
+
 }

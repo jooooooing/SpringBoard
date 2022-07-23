@@ -3,26 +3,20 @@ package kr.ac.kopo.ctc.spring.board.domain;
 
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class BoardItem {
 	
-	//부모가 지워지면 자식도 지워지도록함(orphan removal)
-	@OneToMany(mappedBy = "boardItem", fetch=FetchType.EAGER, orphanRemoval = true)
-	private List<BoardReply> boardReply;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //id autoincrement

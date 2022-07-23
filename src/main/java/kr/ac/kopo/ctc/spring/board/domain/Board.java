@@ -38,26 +38,26 @@ public class Board {
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "board")
 	@JsonBackReference // 순환참조 막기
-	private List<BoardRe> boardRes;
+	private List<BoardReply> boardReplies;
 
-	public List<BoardRe> getBoardRes() {
-		if (boardRes == null) {
-			boardRes = new ArrayList<BoardRe>();
+	public List<BoardReply> getBoardRes() {
+		if (boardReplies == null) {
+			boardReplies = new ArrayList<BoardReply>();
 		}
-		return boardRes;
+		return boardReplies;
 	}
 
-	public void setBoardRes(List<BoardRe> boardRes) {
-		this.boardRes = boardRes;
+	public void setBoardRes(List<BoardReply> boardReplies) {
+		this.boardReplies = boardReplies;
 	}
 
 	public Board() {
 		
 	}
 	
-	public void addBoardRe(BoardRe boardRe) {
-		List<BoardRe> boardRes = getBoardRes();
-		boardRes.add(boardRe);
+	public void addBoardRe(BoardReply boardReply) {
+		List<BoardReply> boardReplies = getBoardRes();
+		boardReplies.add(boardReply);
 	}
 	
 	public Long getSeq() {

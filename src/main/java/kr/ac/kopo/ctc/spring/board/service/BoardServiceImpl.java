@@ -113,19 +113,10 @@ public class BoardServiceImpl implements BoardService {
 		// 페이지 시작 번호 조정
 		curPageNum = (curPageNum <= 3) ? 1 : (curPageNum - 2);
 
-		if ((totalLastPageNum - curPageNum) < 4) {
-			pageList = new Integer[4];
-			for (int val = curPageNum, idx = 0; val <= blockLastPageNum; val++, idx++) {
-				pageList[idx] = val;
-			}
-		} else {
-			// 페이지 번호 할당
 			pageList = new Integer[BLOCK_PAGE_NUM_COUNT];
 			for (int val = curPageNum, idx = 0; val <= blockLastPageNum; val++, idx++) {
 				pageList[idx] = val;
 			}
-
-		}
 
 		return pageList;
 	}
@@ -136,12 +127,14 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.count();
 	}
 
-	// 전체조회, 페이지2
+	// 전체조회, 페이지2 규민코드 
 	@Override
 	public Page<Board> pageableList(Pageable pageable) {
 		return boardRepository.findAll(pageable);
 	}
-
+	
+	
+	//규민코
 	@Override
 	public Pagination getPagination(int currPage, int countPerPage, int pageSize, int totalCount) {
 		// TODO Auto-generated method stub
@@ -203,7 +196,8 @@ public class BoardServiceImpl implements BoardService {
 		return pagination;
 
 	}
-
+	
+	//규민코드 
 	@Override
 	public int checkCPage(String strcPage) {
 		// 현재 페이지 번호 null 체크

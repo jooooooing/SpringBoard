@@ -70,8 +70,8 @@ table td {
 				OnClick="location.href='insertBoardView'">
 		</div>
 		<div>
- 		<c:forEach var="cPage" items="${pageNum}">
- 		<a href = "/board/boardList?page=${cPage-1}&cPage=${cPage}">${cPage}</a>
+ 		<c:forEach var="page" items="${pageNum}">
+ 		<a href = "/board/boardList?page=${page-1}&cPage=${page}">${page}</a>
 		</c:forEach> 
 		</div>
 		

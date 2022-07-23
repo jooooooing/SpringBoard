@@ -1,9 +1,9 @@
 package kr.ac.kopo.ctc.spring.board.service;
 
 import kr.ac.kopo.ctc.spring.board.domain.Board;
-import kr.ac.kopo.ctc.spring.board.domain.BoardRe;
+import kr.ac.kopo.ctc.spring.board.domain.BoardReply;
 
-public interface BoardReService {
+public interface BoardReplyService {
 	
 	final int COUNT_PER_PAGE = 10;
 	final int PAGE_SIZE = 10;
@@ -33,7 +33,7 @@ public interface BoardReService {
 	void deleteItem(int id);
 
 	// 댓글 아이디로 찾기(부모 원글 아이디 찾기 용)
-	BoardRe findItem(int id);
+	BoardReply findItem(int id);
 	
 
 }
