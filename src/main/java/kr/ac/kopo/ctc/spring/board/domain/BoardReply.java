@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class BoardReply {
@@ -19,86 +19,111 @@ public class BoardReply {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private Integer replyId; //pk
+	private Long id;
+	private Long replyId;
+	private Long parentId;
+	private Integer depth;
+	private String replyWriter;
+	private String replyContent;
+	private Date replyRegisterDate;
+	private Date replyUpdateDate;
 	
-	@Column
-	private String content;
 	
-	@Column
-	private String author;
-	
-	@Column Date createdDate = new Date();
-	
-	@Column Integer viewCnt;
-	
-	@ManyToOne(optional=false, fetch=FetchType.LAZY)
-	@JsonManagedReference //참조 통과 어노테이션
-	@JoinColumn(name="board_seq")
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@JsonBackReference //순환참조방지
+	@JoinColumn(name="board_seq", referencedColumnName = "seq")
 	private Board board;
 
-	
-	
-	
-	public BoardReply(String content, String author, Date createdDate, Integer viewCnt, Board board) {
-		super();
-		this.content = content;
-		this.author = author;
-		this.createdDate = createdDate;
-		this.viewCnt = 0; //최초 생성시 조회수 0으로  세팅 
-		this.board = board;
+
+	public Long getId() {
+		return id;
 	}
 
-	public Integer getReplyId() {
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Long getReplyId() {
 		return replyId;
 	}
 
-	public void setReplyId(Integer replyId) {
+
+	public void setReplyId(Long replyId) {
 		this.replyId = replyId;
 	}
 
-	public String getContent() {
-		return content;
+
+	public Long getParentId() {
+		return parentId;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
-	public String getAuthor() {
-		return author;
+
+	public Integer getDepth() {
+		return depth;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+
+	public void setDepth(Integer depth) {
+		this.depth = depth;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
+
+	public String getReplyWriter() {
+		return replyWriter;
 	}
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+
+	public void setReplyWriter(String replyWriter) {
+		this.replyWriter = replyWriter;
 	}
 
-	public Integer getViewCnt() {
-		return viewCnt;
+
+	public String getReplyContent() {
+		return replyContent;
 	}
 
-	public void setViewCnt(Integer viewCnt) {
-		this.viewCnt = viewCnt;
+
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
 	}
+
+
+	public Date getReplyRegisterDate() {
+		return replyRegisterDate;
+	}
+
+
+	public void setReplyRegisterDate(Date replyRegisterDate) {
+		this.replyRegisterDate = replyRegisterDate;
+	}
+
+
+	public Date getReplyUpdateDate() {
+		return replyUpdateDate;
+	}
+
+
+	public void setReplyUpdateDate(Date replyUpdateDate) {
+		this.replyUpdateDate = replyUpdateDate;
+	}
+
 
 	public Board getBoard() {
 		return board;
 	}
 
+
 	public void setBoard(Board board) {
 		this.board = board;
 	}
 
-	
-	
-	
 	
 
 }

@@ -1,39 +1,31 @@
 package kr.ac.kopo.ctc.spring.board.service;
 
-import kr.ac.kopo.ctc.spring.board.domain.Board;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import kr.ac.kopo.ctc.spring.board.domain.BoardReply;
 
 public interface BoardReplyService {
-	
-	final int COUNT_PER_PAGE = 10;
-	final int PAGE_SIZE = 10;
-	
-	//페이지 불러오기
-	Pagination getPagination(String strcPage);
-	
-	// cPage null체크
-	String checkPage(String strcPage);
-	
-	//새로운 날짜 받기
-	String newDate();
-	
-	// 페이지 null 체크
-	public int checkCPage(String strcPage);
 
-	// 조회수 1추가
-	int plusViewcnt(int inputId);
-
-	// 조회수 가져오기
-	Long getViewcnt(int inputId);
-
-	// 댓글 추가하기
-	void createItem(String writer, String title, Board Board);
-
-	// 댓글 삭제하기
-	void deleteItem(int id);
-
-	// 댓글 아이디로 찾기(부모 원글 아이디 찾기 용)
-	BoardReply findItem(int id);
+		// C, U
+		void createBoardReply(BoardReply boardReply);
+		
+		void updateBoardReply(BoardReply boardReply);
+		
+		// R
+		BoardReply findById(Long id);
+		
+		List<BoardReply> findAllByBoardSeq(Long id);
+		
+		List<BoardReply> findAllByBoardSeqOrderByParentIdAscIdAsc(Long id);	// 전체, 원글 아이디에 해당하는 내용만
+		
+		// D
+		@Transactional 
+		void deleteOneById(Long id);
+		
+		@Transactional 
+		void deleteAllByParentId(Long id);
 	
 
 }

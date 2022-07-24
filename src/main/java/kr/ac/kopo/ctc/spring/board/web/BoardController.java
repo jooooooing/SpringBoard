@@ -2,8 +2,6 @@ package kr.ac.kopo.ctc.spring.board.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.ac.kopo.ctc.spring.board.domain.Board;
-import kr.ac.kopo.ctc.spring.board.dto.Pagination;
+import kr.ac.kopo.ctc.spring.board.domain.BoardReply;
+import kr.ac.kopo.ctc.spring.board.service.BoardReplyService;
 import kr.ac.kopo.ctc.spring.board.service.BoardService;
 
 @Controller
@@ -24,7 +23,10 @@ import kr.ac.kopo.ctc.spring.board.service.BoardService;
 public class BoardController {
 
 	@Autowired
-	BoardService boardService;
+	private BoardService boardService;
+	
+	@Autowired
+	private BoardReplyService boardReplyService;
 
 //	@RequestMapping("/testBoardList") //글 조회 테스트
 //	public String testBoardList(Model model) {
@@ -114,6 +116,14 @@ public class BoardController {
 		Integer[] pageNums = boardService.getPageNums(curPageNum);
 		model.addAttribute("pageNum", pageNums);
 		return "getBoardList";
+	}
+	
+	//댓글 생성 
+	@RequestMapping(value = "/createBoardReply")
+	public String createBoardReply(BoardReply boardReply) {
+		boardReplyService.createBoardReply(boardReply);
+		Long toGO = boardReply.getReplyId();
+		return "redirect:getBoard?seq=" + toGO + "";
 	}
 
 }

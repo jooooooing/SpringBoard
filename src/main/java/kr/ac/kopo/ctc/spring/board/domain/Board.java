@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.DynamicInsert;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @DynamicInsert
@@ -37,18 +38,18 @@ public class Board {
 	private Long cnt; //조회수
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "board")
-	@JsonBackReference // 순환참조 막기
-	private List<BoardReply> boardReplies;
+	@JsonManagedReference //순환참조 방지
+	private List<BoardReply> boardReplys;
 
 	public List<BoardReply> getBoardReply() {
-		if (boardReplies == null) {
-			boardReplies = new ArrayList<BoardReply>();
+		if (boardReplys == null) {
+			boardReplys = new ArrayList<BoardReply>();
 		}
-		return boardReplies;
+		return boardReplys;
 	}
 
 	public void setBoardRes(List<BoardReply> boardReplies) {
-		this.boardReplies = boardReplies;
+		this.boardReplys = boardReplies;
 	}
 
 	public Board() {
