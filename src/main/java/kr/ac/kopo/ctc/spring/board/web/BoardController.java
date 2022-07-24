@@ -10,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -55,9 +56,30 @@ public class BoardController {
 	}
 
 //	글 하나 조회
+//	@RequestMapping("/getBoard")
+//	public String getBoard(Model model, Board board) {
+//		model.addAttribute("board", boardService.getBoard((board)));
+//		return "getBoard";
+//	}
+//	
+	
+//	글 하나 조회2
+//	@RequestMapping("/getBoard/{id}")
+//	public String getBoard(Model model, @PathVariable("seq") Long id, Board board) {
+//		
+//		model.addAttribute("board", boardService.getBoard(board));
+//		model.addAttribute("boardReplys", boardReplyService.findAllByBoardSeqOrderByParentIdAscIdAsc(id));
+//		
+//		return "getBoard";
+//	}
+	
+	
+//	글 하나 조회3
 	@RequestMapping("/getBoard")
-	public String getBoard(Board board, Model model) {
+	public String getBoard3(Model model, Board board) {
+		Long id = boardService.getBoard(board).getSeq();
 		model.addAttribute("board", boardService.getBoard((board)));
+		model.addAttribute("boardReplys", boardReplyService.findAllByBoardSeqOrderByParentIdAscIdAsc(id));
 		return "getBoard";
 	}
 

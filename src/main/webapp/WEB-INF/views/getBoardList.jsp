@@ -56,6 +56,7 @@ table td {
 					<td>${board.seq}</td>
 					<td style="text-align: left"><a
 						href="getBoard?seq=${board.seq}">${board.title}</a></td>
+<%-- 						href="getBoard/${board.seq}">${board.title}</a></td> --%>
 					<td>${board.writer}</td>
 					<td><fmt:formatDate value="${board.createDate}"
 							pattern="yyyy-MM-dd"></fmt:formatDate></td>
