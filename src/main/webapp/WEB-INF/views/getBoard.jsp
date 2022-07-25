@@ -139,7 +139,7 @@ textarea {
 							<c:out value="${boardReply.replyContent}" />
 						</c:if></td>
 					<td colspan=2><input type=button value="삭제"
-						onclick="location.href='/board/delteBoardReply?id=${boardReply.id}'">
+						onclick="location.href='/board/deleteBoardReply?id=${boardReply.id}'">
 						<input type=button value="수정"
 						onclick="location.href='/board/boardReplyUpdateForm?id=${boardReply.id}'">
 					</td>

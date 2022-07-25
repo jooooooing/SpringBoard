@@ -3,6 +3,8 @@ package kr.ac.kopo.ctc.spring.board.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,14 +70,17 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 		return boardReplyRepository.findById(id).get();
 	}
 
-	@Override
-	public void deleteAllByParentId(Long id) { //댓글삭제 
-		boardReplyRepository.deleteAllByParentId(id);		
-	}
 
 	@Override
-	public void deleteOneById(Long id) { // 대댓글 삭제
-		boardReplyRepository.deleteById(id);
+	@Transactional //삭제를 하는 메소드에는 Transactional을 붙여줘야함
+	public void deleteById(Long id) { // 대댓글 삭제
+		BoardReply boardReply = boardReplyRepository.findById(id).get();
+		
+		if(boardReply.getId() == boardReply.getParentId()) {
+			boardReplyRepository.deleteAllByParentId(id);
+		} else {
+			boardReplyRepository.deleteById(id);
+		}
 	}
 
 

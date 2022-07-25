@@ -22,10 +22,7 @@ public interface BoardReplyService {
 		
 		// D
 		@Transactional 
-		void deleteOneById(Long id);
+		void deleteById(Long id);
 		
-		@Transactional 
-		void deleteAllByParentId(Long id);
-	
 
 }

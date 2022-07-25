@@ -22,8 +22,6 @@ public interface BoardService {
 	
 	List<Board> searchPosts(String keyword);
 	
-	List<Board> getBoardListPaging(Integer pageNum);
-	
 	Integer[] getPageNums(Integer curPageNum);
 	
 	Long getBoardCount();

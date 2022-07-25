@@ -76,7 +76,9 @@ public class BoardController {
 //	글 하나 조회3
 	@RequestMapping("/getBoard")
 	public String getBoard3(Model model, Board board) {
-		Long id = boardService.getBoard(board).getSeq();
+		
+		Long id = board.getSeq();
+//		Long id = boardService.getBoard(board).getSeq();
 		model.addAttribute("board", boardService.getBoard((board)));
 		model.addAttribute("boardReplys", boardReplyService.findAllByBoardSeqOrderByParentIdAscIdAsc(id));
 		return "getBoard";
@@ -113,8 +115,13 @@ public class BoardController {
 
 	// 글 검색
 	@GetMapping("/search")
-	public String search(@RequestParam(value = "keyword") String keyword, Model model, @RequestParam(value = "cPage", defaultValue = "0") Integer curPageNum) {
+	public String search(Model model, @RequestParam(value = "keyword") String keyword,  @RequestParam(value = "cPage", defaultValue = "0") Integer curPageNum, 
+			@PageableDefault(page = 0, size = 10, sort = "seq", direction = Sort.Direction.DESC) Pageable pageable) {
 		model.addAttribute("keyword", keyword); // 뷰에서 받은 getparameter 저장
+		
+//		Page<Board> pageLists = boardService.pageableList(pageable);
+//		model.addAttribute("pageList", pageLists.getContent());
+		
 		List<Board> boardSearched = boardService.searchPosts(keyword); // List자료형에 search메소드 결과값 저장
 		model.addAttribute("pageList", boardSearched); // boardList(getBoardList에 사용할 변수값)에 위 결과값인 boardSearched저장
 		
@@ -161,9 +168,9 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 	
-	@RequestMapping(value = "/delteBoardReply")
+	@RequestMapping(value = "/deleteBoardReply")
 	public String deleteBoardReply(@RequestParam(value = "id") Long id) {
-		boardReplyService.deleteOneById(id);
+		boardReplyService.deleteById(id);
 		return "redirect:/board/boardList";
 	}
 

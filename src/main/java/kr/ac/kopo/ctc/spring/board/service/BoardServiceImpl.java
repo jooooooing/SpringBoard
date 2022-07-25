@@ -6,13 +6,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort; //역순 출력을 위한 import
 import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.ctc.spring.board.domain.Board;
-import kr.ac.kopo.ctc.spring.board.dto.Pagination;
 import kr.ac.kopo.ctc.spring.board.repository.BoardRepository;
 
 @Service
@@ -79,19 +77,6 @@ public class BoardServiceImpl implements BoardService {
 		return boards;
 	}
 
-	// 페이징1
-	@Override
-	@Transactional
-	public List<Board> getBoardListPaging(Integer pageNum) {
-
-		Page<Board> page = boardRepository
-				.findAll(PageRequest.of(pageNum - 1, PAGE_POST_COUNT, Sort.by(Sort.Direction.ASC, "seq")));
-
-		List<Board> boards = page.getContent();
-
-		return boards;
-	}
-
 	@Override
 	public Integer[] getPageNums(Integer curPageNum) {
 		
@@ -133,6 +118,13 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.findAll(pageable);
 	}
 	
+	@Override
+	@Transactional
+	public Page<Board> searchPostsPaging(String keyword, Pageable pageable) {
+		Page<Board> boards = boardRepository.findByTitleContainingOrderBySeqDesc(keyword, pageable); // 제목포함, seq를 역순으로 정렬
+		return boards;
+	}
+
 	
 
 }
