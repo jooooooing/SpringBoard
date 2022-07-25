@@ -30,10 +30,10 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 		boardReplyRepository.save(boardReply);
 		
 		if (boardReply.getDepth() == 1) {
-			boardReply.setParentId(boardReply.getParentId());
+			boardReply.setParentId(boardReply.getId());
+			boardReplyRepository.save(boardReply);
 		}
 		
-		boardReplyRepository.save(boardReply);
 	}
 
 	@Override
@@ -67,16 +67,16 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 	public BoardReply findById(Long id) {
 		return boardReplyRepository.findById(id).get();
 	}
-	@Override
-	public void deleteOneById(Long id) { // 대댓글 삭
-		boardReplyRepository.deleteById(id);
-	}
 
 	@Override
 	public void deleteAllByParentId(Long id) { //댓글삭제 
 		boardReplyRepository.deleteAllByParentId(id);		
 	}
 
+	@Override
+	public void deleteOneById(Long id) { // 대댓글 삭제
+		boardReplyRepository.deleteById(id);
+	}
 
 
 

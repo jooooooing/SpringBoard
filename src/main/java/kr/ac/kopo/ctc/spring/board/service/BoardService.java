@@ -30,9 +30,4 @@ public interface BoardService {
 	
 	Page<Board> pageableList(Pageable pageable);
 	
-	// 페이지네이션
-	Pagination getPagination(int currPage, int countPerPage, int pageSize, int totalCount);
-	
-	// 페이지 null 체크
-	public int checkCPage(String strcPage);
 }

@@ -41,8 +41,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board getBoard(Board board) {
-		// 조회수 카운트 +1
 		Board findBoard = boardRepository.findById(board.getSeq()).get();
+		// 조회수 카운트 +1
 		findBoard.setCnt(findBoard.getCnt() + 1L);
 		boardRepository.save(findBoard);
 		return findBoard;
@@ -127,87 +127,12 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.count();
 	}
 
-	// 전체조회, 페이지2 규민코드 
+	// 전체조회, 페이징
 	@Override
 	public Page<Board> pageableList(Pageable pageable) {
 		return boardRepository.findAll(pageable);
 	}
 	
 	
-	//규민코
-	@Override
-	public Pagination getPagination(int currPage, int countPerPage, int pageSize, int totalCount) {
-		// TODO Auto-generated method stub
-		// Parameter : currPage : 현재 페이지 , countPerPage : 한 페이지에 보여줄 쪽 수, pageSize : 한
-		// 페이지 게시글 수, totalCount : 전체 게시글 수
-		if (currPage <= 1) {
-			currPage = 1;
-		}
-
-		// firstPage : 제일 처음 페이지
-		int firstPage = 1;
-
-		// finalPage : 제일 마지막 페이지
-		int finalPage = (int) Math.ceil((double) totalCount / pageSize); // 숫자 올림
-
-		// 현재 페이지가 마지막 페이지보다 크면 > 현재 페이지는 마지막 페이지
-		if (currPage >= finalPage) {
-			currPage = finalPage;
-		}
-
-		// previousListPage : 앞 숫자 목록의 처음 숫자(<를 누르면 나오는 숫자)
-		int previousListPage = (int) Math.floor((double) currPage / countPerPage);
-		// int previousListPage = (currPage/countPerPage) * countPerPage + 1;
-
-		if (previousListPage <= 1) {
-			previousListPage = 1;
-		} else {
-			previousListPage = (previousListPage - 1) * countPerPage + 1;
-		}
-
-		// nextListPage : 다음 목록의 처음 숫자 (>를 누르면 나오는 숫자)
-		int nextListPage = (int) (Math.ceil((double) currPage / countPerPage) * countPerPage) + 1;
-
-		if (nextListPage > finalPage) {
-			nextListPage = finalPage;
-		}
-
-		/*
-		 * if (countPerPage <= 1) { countPerPage = 1; }
-		 */
-
-		if (totalCount == 0) {
-
-			firstPage = 1;
-			previousListPage = 1;
-			nextListPage = 1;
-			finalPage = 1;
-			currPage = 1;
-
-		}
-
-		Pagination pagination = new Pagination();
-		pagination.setPpPage(firstPage);
-		pagination.setpPage(previousListPage);
-		pagination.setnPage(nextListPage);
-		pagination.setNnPage(finalPage);
-		pagination.setcPage(currPage);
-
-		return pagination;
-
-	}
-	
-	//규민코드 
-	@Override
-	public int checkCPage(String strcPage) {
-		// 현재 페이지 번호 null 체크
-		int cPage;
-		if (strcPage == null) {
-			cPage = 0;
-		} else {
-			cPage = Integer.parseInt(strcPage) - 1;
-		}
-		return cPage;
-	}
 
 }

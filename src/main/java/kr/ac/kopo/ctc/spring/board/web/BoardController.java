@@ -10,7 +10,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -146,6 +145,26 @@ public class BoardController {
 		boardReplyService.createBoardReply(boardReply);
 		Long toGO = boardReply.getReplyId();
 		return "redirect:getBoard?seq=" + toGO + "";
+	}
+	
+	//댓글 업데이트
+	@RequestMapping(value = "/boardReplyUpdateForm")
+	public String updateBoardReplyForm(Model model, @RequestParam(value = "id") Long id) {
+		model.addAttribute("updateBoardReply", boardReplyService.findById(id));
+		return "boardReplyUpdateForm";
+	}
+	
+	//
+	@RequestMapping(value = "/boardReplyUpdateForm/boardReplyUpdate")
+	public String boardBoardReply(BoardReply boardReply) {
+		boardReplyService.updateBoardReply(boardReply);
+		return "redirect:/board/boardList";
+	}
+	
+	@RequestMapping(value = "/delteBoardReply")
+	public String deleteBoardReply(@RequestParam(value = "id") Long id) {
+		boardReplyService.deleteOneById(id);
+		return "redirect:/board/boardList";
 	}
 
 }
