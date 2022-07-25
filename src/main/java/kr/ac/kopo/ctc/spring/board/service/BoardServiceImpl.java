@@ -118,12 +118,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.findAll(pageable);
 	}
 	
-	@Override
-	@Transactional
-	public Page<Board> searchPostsPaging(String keyword, Pageable pageable) {
-		Page<Board> boards = boardRepository.findByTitleContainingOrderBySeqDesc(keyword, pageable); // 제목포함, seq를 역순으로 정렬
-		return boards;
-	}
+
 
 	
 
